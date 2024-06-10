@@ -395,6 +395,7 @@ CPU.prototype.get_state = function()
     state[62] = this.fw_value;
 
     state[63] = this.devices.ioapic;
+    state[83] = this.devices.fdc.fda_image;
 
     state[64] = this.tss_size_32[0];
 
@@ -537,7 +538,7 @@ CPU.prototype.set_state = function(state)
     this.devices.vga && this.devices.vga.set_state(state[52]);
     this.devices.ps2 && this.devices.ps2.set_state(state[53]);
     this.devices.uart0 && this.devices.uart0.set_state(state[54]);
-    this.devices.fdc && this.devices.fdc.set_state(state[55]);
+    this.devices.fdc && this.devices.fdc.set_state(state[55], state[83]);
     this.devices.cdrom && this.devices.cdrom.set_state(state[56]);
     this.devices.hda && this.devices.hda.set_state(state[57]);
     this.devices.pit && this.devices.pit.set_state(state[58]);
@@ -549,6 +550,7 @@ CPU.prototype.set_state = function(state)
     this.devices.uart2 && this.devices.uart2.set_state(state[80]);
     this.devices.uart3 && this.devices.uart3.set_state(state[81]);
     this.devices.virtio_console && this.devices.virtio_console.set_state(state[82]);
+    state[83] && this.devices.fdc.set_state(state[55], state[83]);
 
     this.fw_value = state[62];
 

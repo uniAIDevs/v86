@@ -149,6 +149,7 @@ FloppyController.prototype.get_state = function()
     state[16] = this.sectors_per_track;
     state[17] = this.number_of_heads;
     state[18] = this.number_of_cylinders;
+    state[19] = this.fda_image;
 
     return state;
 };
@@ -174,6 +175,7 @@ FloppyController.prototype.set_state = function(state)
     this.sectors_per_track = state[16];
     this.number_of_heads = state[17];
     this.number_of_cylinders = state[18];
+    this.fda_image = state[19];
 };
 
 FloppyController.prototype.port3F0_read = function()
